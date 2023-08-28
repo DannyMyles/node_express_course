@@ -1,7 +1,7 @@
-const Task = require("../models/Task");
+const Task = require("../models/TaskModel");
 const mongoose = require("mongoose");
 const { ObjectId } =  require('mongodb')
-const asyncWrapper = require('../middleware/async')
+const asyncWrapper = require('../middleware/asyncMiddleware')
 // Controllers are functions to perform a specific task
 const getAllTasks = asyncWrapper(async (req, res, next) => {
   const tasks = await Task.find({});
@@ -38,7 +38,7 @@ const getTask = asyncWrapper( async (req, res, next) => {
 });
 // Update a Task
 const updateTask = asyncWrapper(async(req, res, next) => {
-		const {id:updateId} = req.params;
+		const {id: updateId} = req.params;
 		const task = await Task.findOneAndUpdate({_id: ObjectId(updateId)}, req.body, {
 			new : true,
 			runValidators:true
