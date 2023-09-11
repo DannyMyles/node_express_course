@@ -1,6 +1,6 @@
-const express = require('express').Router()
+const express = require('express')
+const router = express.Router()
 const { signupUser, loginUser,updateUser } = require ('../controllers/authControllers')
-const router = require('./taskRoutes')
 
 router.route("/auth/signup").post(signupUser)
 router.route("/auth/login").post(loginUser)
