@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
-const tasksRoutes = require("./routes/taskRoutes");
 const authRoutes = require("./routes/authRoutes");
+const productRoutes = require("./routes/productRoutes");
 const morgan = require("morgan");
 const connectDB = require("./db/connect");
 const cors = require("cors");
@@ -25,15 +25,16 @@ require("dotenv").config();
   // Middle to serve static files
   app.use(express.static("./public"));
 
-  // Logs HTTP request details to the console or a log file(middleware)
+    // Serve the "uploads" directory as a static folder.
+  app.use('/uploads', express.static('uploads'));
+    // Logs HTTP request details to the console or a log file(middleware)
   app.use(morgan("dev"));
 
   // MIDDLEWARES START END
 
   // use the tasks route
-  app.use("/api/v1", tasksRoutes);
   app.use("/api/v1", authRoutes);
-
+  app.use("/api/v1", productRoutes)
 
   // START ERROR HANDLING MIDLEWRES
 
