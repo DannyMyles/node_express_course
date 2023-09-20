@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const authRoutes = require("./routes/authRoutes");
+const orderRoutes = require("./routes/orderRoutes");
 const productRoutes = require("./routes/productRoutes");
 const morgan = require("morgan");
 const connectDB = require("./db/connect");
@@ -35,6 +36,7 @@ require("dotenv").config();
   // use the tasks route
   app.use("/api/v1", authRoutes);
   app.use("/api/v1", productRoutes)
+  app.use("/api/v1", orderRoutes)
 
   // START ERROR HANDLING MIDLEWRES
 

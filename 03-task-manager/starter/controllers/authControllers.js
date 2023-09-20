@@ -42,16 +42,16 @@ const loginUser = asyncWrapper(async (req, res, next) => {
     return res.status(400).json({ error: "Email and password are required" });
   }
 
-  // try {
+  try {
   const user = await User.login(email, password);
   // Generate JWT and set cookie
   const token = jwtService.generateAccessToken(user._id, user.email);
   res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
   res.status(200).json({ user: user._id });
-  // } catch (error) {
-  console.error("Error while logging in:", error);
+  } catch (error) {
+  console.log("Error while logging in:", error);
   res.status(500).json({ err: "An error occurred while logging in" });
-  // }
+  }
 });
 
 // update user

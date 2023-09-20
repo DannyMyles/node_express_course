@@ -2,30 +2,30 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const { isEmail } = require("validator");
 const userSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    require: [true, "Please enter an username"],
-    trim: true,
-    maxlength: 20,
+    username: {
+      type: String,
+      require: [true, "Please enter an username"],
+      trim: true,
+      maxlength: 20,
+      unique: true,
+    },
+    email: {
+    type : String,
+    require:[true,"please provide a valid Email"] ,
     unique: true,
-  },
-  email: {
-	type : String,
-	require:[true,"please provide a valid Email"] ,
-	unique: true,
-    lowercase: true,
-    validate: [isEmail, "Please enter a valid email"],
-  },
-  password:{
-	type:String,
-	required:[true,'password is required'],
-	minlength:6
-  },
-  isAdmin:{
-    type:Boolean,
-    default:false
-  }
-},{
+      lowercase: true,
+      validate: [isEmail, "Please enter a valid email"],
+    },
+    password:{
+    type:String,
+    required:[true,'password is required'],
+    minlength:6
+    },
+    isAdmin:{
+      type:Boolean,
+      default:false
+    }
+  },{
   timestamps: true, // Add timestamps to the schema
 });
 
